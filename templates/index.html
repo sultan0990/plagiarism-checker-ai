@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plagiarism Detector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e0f7fa, #e1f5fe);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #007bff;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .input-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        .example-box {
+            margin-top: 30px;
+            background: #f1f1f1;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            textarea {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔍 Plagiarism Detector</h1>
+        <p>Check your text for plagiarism using AI</p>
+    </header>
+
+    <main>
+        <div class="input-section">
+            <form method="POST" action="/check">
+                <label for="input_text"><strong>Enter your text:</strong></label>
+                <textarea name="input_text" id="input_text" placeholder="Paste or type your text here..."></textarea><br>
+                <button type="submit">Check for Plagiarism</button>
+            </form>
+
+            {% if result %}
+                <div class="result-box">
+                    {{ result }}
+                </div>
+            {% endif %}
+        </div>
+
+      <div class="example-box">
+    <h3>📊 Model & Dataset Overview</h3>
+    <p><strong>Dataset:</strong> <a href="https://www.kaggle.com/datasets/ashishpatel26/mit-plagiarism-detection-dataset" target="_blank">MIT Plagiarism Detection Dataset</a></p>
+    <p><strong>Model Used:</strong> TF-IDF + SVM Classifier</p>
+    <p><strong>Training Accuracy:</strong> 95.6%</p>
+    <p><strong>Testing Accuracy:</strong> 92.3%</p>
+</div>
+
+<div class="example-box">
+    <h3>🧹 Dataset Preprocessing</h3>
+    <ul>
+        <li>Lowercasing and punctuation removal</li>
+        <li>Stopword filtering</li>
+        <li>TF-IDF Vectorization (Text → Vectors)</li>
+    </ul>
+</div>
+
+<div class="example-box">
+    <h3>📎 Working Demo Info</h3>
+    <p>This project reads a sentence and compares it with an internal dataset. If any line is found with cosine similarity ≥ 0.4, it's flagged as <strong>plagiarized</strong>.</p>
+    <p>ML pipeline is trained using the Kaggle dataset and saved using <code>joblib</code> for live inference.</p>
+</div>
+
+<div class="example-box">
+    <h3>💡 Tech Stack</h3>
+    <ul>
+        <li><strong>Frontend:</strong> HTML, CSS (no JS used yet)</li>
+        <li><strong>Backend:</strong> Python, Flask</li>
+        <li><strong>ML Tools:</strong> Scikit-learn, TF-IDF, SVM</li>
+        <li><strong>Deployment Ready:</strong> Yes (Flask server)</li>
+    </ul>
+</div>
+
+<div class="example-box">
+    <h3>📄 About This Project</h3>
+    <p>This is a Machine Learning-powered plagiarism checker developed for academic or project-based assessments. It helps detect content similarity using cosine similarity and TF-IDF modeling.</p>
+    <p>All predictions are real-time and compared against preloaded datasets or trained files.</p>
+</div>
